@@ -25,3 +25,12 @@ class GambleExt:
             await self.mongo.set_user_money(user_id, current + amount)
             return Embed(title=f"출석하여 {amount}원을 받았습니다.")
         return Embed(title="지갑이 없습니다.", description="`.돈` 명령어로 지갑을 생성하세요.")
+
+    async def ranking(self) -> Embed:
+        ranking = await self.mongo.get_all_users_data(10)
+        embed = Embed(title="Top 10")
+        for user in ranking:
+            embed.add_field(
+                name=f"{user['name']}", value=f"{format(user['money'], ',')}원"
+            )
+        return embed
