@@ -12,6 +12,7 @@ class Error(Cog):
             await ctx.send(
                 f"해당 명령어는 아직 사용할 수 없습니다.\n{round(error.retry_after)}초 후에 다시 시도하세요."
             )
+        raise error
 
 
 def setup(bot):
