@@ -23,5 +23,8 @@ class Mongo:
     async def get_all_users_data(self, limit: int) -> None:
         return cast(
             list[dict[str, any]],
-            await self.__user_data.find({}).sort("money", -1).limit(limit),
+            await self.__user_data.find({})
+            .sort("money", -1)
+            .limit(limit)
+            .to_list(limit),
         )
