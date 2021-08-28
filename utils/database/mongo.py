@@ -1,4 +1,4 @@
-from typing import Optional, cast
+from typing import Any, Optional, cast
 from motor.motor_asyncio import AsyncIOMotorClient
 
 
@@ -18,9 +18,9 @@ class Mongo:
             {"user_id": user_id}, {"$set": {"money": money}}
         )
 
-    async def get_all_users_data(self, limit: int) -> None:
+    async def get_all_users_data(self, limit: int) -> list[dict[str, Any]]:
         return cast(
-            list[dict[str, any]],
+            list[dict[str, Any]],
             await self.__user_data.find({})
             .sort("money", -1)
             .limit(limit)
