@@ -28,7 +28,7 @@ class MoneyExt:
         ctx.command.reset_cooldown(ctx)
         return Embed(title="지갑이 없습니다.", description="`.돈` 명령어로 지갑을 생성하세요.")
 
-    async def ranking(self, ctx) -> Embed:
+    async def ranking(self, ctx: Context) -> Embed:
         ranking = await self.mongo.get_all_users_data(10)
         embed = Embed(title="Top 10")
         for user in ranking:
