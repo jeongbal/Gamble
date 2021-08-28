@@ -12,7 +12,7 @@ class Gamble(commands.Cog):
     @commands.command(name="돈", aliases=["지갑", "ㄷ", "ㅈㄱ", "wr", "ehs", "e"])
     async def _money(self, ctx):
         msg = await ctx.send(embed=Embed(title="불러오는 중"))
-        embed = await self.gamble.money(ctx.author.id, ctx.author.name)
+        embed = await self.gamble.money(ctx.author.id)
         await msg.edit(embed=embed)
 
     @commands.command(name="출석", aliases=["ㅊㅅ", "ct", "cnftjr"])

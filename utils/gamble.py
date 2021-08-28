@@ -8,14 +8,14 @@ class GambleExt:
     def __init__(self) -> None:
         self.mongo = Mongo(os.getenv("MONGO_DB_URL"))
 
-    async def money(self, user_id: int, user_name: str) -> Embed:
+    async def money(self, user_id: int) -> Embed:
         if user_data := await self.mongo.get_user_data(user_id):
             return Embed(
                 title="잔고",
                 description=f"**{format(user_data['money'], ',')}**원",
                 color=0x30807C,
             )
-        await self.mongo.initialize_user(user_id, user_name)
+        await self.mongo.initialize_user(user_id)
         return Embed(title="지갑 없음", description="지갑을 생성합니다.", color=0x80307C)
 
     async def attend(self, user_id: int) -> Embed:
@@ -31,7 +31,7 @@ class GambleExt:
         embed = Embed(title="Top 10")
         for user in ranking:
             embed.add_field(
-                name=f"{user['name']}",
+                name=f"{user['user_id']}",
                 value=f"{format(user['money'], ',')}원",
                 inline=False,
             )
