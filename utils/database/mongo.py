@@ -6,6 +6,7 @@ class Mongo:
     def __init__(self, mongo_db_url: str) -> None:
         self.__client = AsyncIOMotorClient(mongo_db_url)
         self.__user_data = self.__client.gamble.user_data
+        self.__coin_price = self.__client.coin.coin_price
 
     async def initialize_user(self, user_id: int) -> None:
         await self.__user_data.insert_one({"user_id": user_id, "money": 0})
@@ -25,4 +26,15 @@ class Mongo:
             .sort("money", -1)
             .limit(limit)
             .to_list(limit),
+        )
+
+    async def get_all_coins_data(self) -> list[dict[str, Any]]:
+        return cast(
+            list[dict[str, Any]],
+            await self.__coin_price.find({}).sort("name", 1).to_list(5),
+        )
+
+    async def update_coin_price(self, coin: str, price: int, previous: int) -> None:
+        await self.__coin_price.update_one(
+            {"name": coin}, {"$set": {"price": price, "previous": previous}}
         )
