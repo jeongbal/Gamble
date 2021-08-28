@@ -16,14 +16,14 @@ class Gamble(commands.Cog):
         embed = await self.gamble.money(ctx.author.id)
         await msg.edit(embed=embed)
 
-    @commands.command(name="출석", aliases=["ㅊㅅ", "ct", "cnftjr"])
+    @commands.command(name="출석", aliases=["ㅊㅅ", "ct", "cnftjr", "cㅅ"])
     @commands.cooldown(1, 300, commands.BucketType.user)
     async def _attend(self, ctx: Context):
         msg = await ctx.send(embed=Embed(title="ㄱㄷ"))
         embed = await self.gamble.attend(ctx)
         await msg.edit(embed=embed)
 
-    @commands.command(name="랭킹", aliases=["ㄹㅋ", "fz"])
+    @commands.command(name="랭킹", aliases=["ㄹㅋ", "fz", "fㅋ"])
     async def _ranking(self, ctx: Context):
         msg = await ctx.send(embed=Embed(title="불러오는 중"))
         embed = await self.gamble.ranking(ctx)
