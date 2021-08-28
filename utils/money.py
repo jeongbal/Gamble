@@ -5,7 +5,7 @@ import os
 from random import randint
 
 
-class GambleExt:
+class MoneyExt:
     def __init__(self) -> None:
         self.mongo = Mongo(os.getenv("MONGO_DB_URL"))
 
