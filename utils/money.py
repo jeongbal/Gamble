@@ -22,7 +22,7 @@ class MoneyExt:
     async def attend(self, ctx: Context) -> Embed:
         if user_data := await self.mongo.get_user_data(ctx.author.id):
             current = user_data["money"]
-            amount = randint(10000000, 100000000) // 1000
+            amount = randint(10000, 100000) // 1000 * 1000
             await self.mongo.set_user_money(ctx.author.id, current + amount)
             return Embed(title=f"출석하여 {amount}원을 받았습니다.")
         ctx.command.reset_cooldown(ctx)
