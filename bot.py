@@ -5,7 +5,7 @@ from pathlib import Path
 import os
 
 
-bot = commands.Bot(command_prefix=".")
+bot = commands.Bot(command_prefix=";")
 token = os.environ["DISCORD_TOKEN"]
 
 cwd = Path(__file__).parents[0]
@@ -16,7 +16,7 @@ bot.cwd = cwd
 @bot.event
 async def on_ready():
     print("Bot is ready")
-    await bot.change_presence(status=Status.online, activity=Game(".help"))
+    await bot.change_presence(status=Status.online, activity=Game(";help"))
 
 
 @bot.event
