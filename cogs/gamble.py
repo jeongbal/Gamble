@@ -25,7 +25,7 @@ class Gamble(commands.Cog):
     @commands.command(name="랭킹", aliases=["ㄹㅋ", "fz"])
     async def _ranking(self, ctx):
         msg = await ctx.send(embed=Embed(title="불러온느 중"))
-        embed = await self.gamble.ranking()
+        embed = await self.gamble.ranking(ctx)
         await msg.edit(embed=embed)
 
 
