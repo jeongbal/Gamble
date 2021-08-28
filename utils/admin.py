@@ -10,5 +10,5 @@ class AdminExt:
     async def set_money(self, user_id, money) -> Embed:
         await self.mongo.set_user_money(user_id, money)
         return Embed(
-            title="잔고 수정", description=f"<@{user_id}>: {money}", color=0x00FF00
+            title="잔고 수정", description=f"<@{user_id}> 잔고: {money}", color=0x00FF00
         )
