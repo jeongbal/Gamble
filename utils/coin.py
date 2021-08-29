@@ -99,6 +99,6 @@ class CoinExt:
         await self.mongo.exchange_coin(user_id, coin, -user_coins[coin])
         new_user_data = await self.mongo.get_user_data(user_id)
         return Embed(
-            title="구매 성공",
+            title="판매 성공",
             description=f"잔고: {new_user_data['money']} | {self.__coin_emoji[coin]} 소지량: {new_user_data['coins'][coin]}",
         )
