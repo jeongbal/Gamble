@@ -20,9 +20,9 @@ class CoinExt:
         for coin in coin_list:
             random_amount = randint(-5000, 5000)
             if random_amount <= -4900:
-                random_amount = -20000
+                random_amount = -50000
             elif random_amount >= 4900:
-                random_amount = 20000
+                random_amount = 50000
             price = coin["price"]
             new_price = (
                 price + random_amount
