@@ -1,6 +1,5 @@
 from utils.database.mongo import Mongo
 import os
-from typing import Any
 from random import randint
 from discord.embeds import Embed
 
@@ -69,3 +68,17 @@ class CoinExt:
         for coin, amount in user_coins.items():
             embed.add_field(name=f"{self.__coin_emoji[coin]}", value=f"{amount}개")
         return embed
+
+    async def full_purchase(self, user_id: int, coin: str) -> Embed:
+        user_data = await self.mongo.get_user_data(user_id)
+        user_money = user_data["money"]
+        coin_data = await self.mongo.get_coin_price(coin)
+        amount = user_money // coin_data["price"]
+        if amount == 0:
+            return Embed(title="돈이 부족합니다.")
+        await self.mongo.exchange_coin(user_id, coin, amount)
+        new_user_data = await self.mongo.get_user_data(user_id)
+        return Embed(
+            title="구매 성공",
+            description=f"잔고: {new_user_data['money']} | {self.__coin_emoji[coin]} 소지량: {new_user_data['coins'][coin]}",
+        )
