@@ -19,7 +19,7 @@ class Money(commands.Cog):
         await msg.edit(embed=embed)
 
     @commands.command(name="출석", aliases=["ㅊㅅ", "ct", "cnftjr", "cㅅ"])
-    @commands.cooldown(1, 300, commands.BucketType.user)
+    @commands.cooldown(1, 600, commands.BucketType.user)
     async def _attend(self, ctx: Context):
         msg: Message = await ctx.send(embed=Embed(title="ㄱㄷ"))
         embed = await self.money.attend(ctx)
