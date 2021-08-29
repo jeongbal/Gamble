@@ -26,7 +26,7 @@ class MoneyExt:
             await self.mongo.set_user_money(ctx.author.id, current + amount)
             return Embed(title=f"출석하여 {amount}원을 받았습니다.")
         ctx.command.reset_cooldown(ctx)
-        return Embed(title="지갑이 없습니다.", description="`.돈` 명령어로 지갑을 생성하세요.")
+        return Embed(title="지갑이 없습니다.", description="`;돈` 명령어로 지갑을 생성하세요.")
 
     async def ranking(self, ctx: Context) -> Embed:
         ranking = await self.mongo.get_all_users_data(10)
