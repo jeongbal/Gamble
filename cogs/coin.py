@@ -11,7 +11,7 @@ class Coin(commands.Cog):
         self.coin = CoinExt()
         self.update_price.start()
 
-    @tasks.loop(seconds=300)
+    @tasks.loop(seconds=180)
     async def update_price(self) -> None:
         await self.coin.update_price()
 
