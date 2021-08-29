@@ -19,7 +19,7 @@ class CoinExt:
     async def update_price(self) -> None:
         coin_list = await self.mongo.get_all_coins_data()
         for coin in coin_list:
-            random_amount = randint(-5000, 5000)
+            random_amount = round(randint(-5000000, 5000000) / 1000)
             if random_amount <= -4900:
                 random_amount = -50000
             elif random_amount >= 4900:
