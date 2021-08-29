@@ -2,6 +2,7 @@ from utils.database.mongo import Mongo
 import os
 from random import randint
 from discord.embeds import Embed
+from datetime import datetime, timezone
 
 
 class CoinExt:
@@ -31,8 +32,9 @@ class CoinExt:
             )
             await self.mongo.update_coin_price(coin["name"], new_price, price)
 
-    async def coin_list(self) -> Embed:
+    async def coin_list(self, next: datetime) -> Embed:
         coin_list = await self.mongo.get_all_coins_data()
+        now = datetime.now(timezone.utc)
         embed = Embed(title="코인 시세")
         for coin in coin_list:
             updown_icon = (
@@ -46,7 +48,7 @@ class CoinExt:
                 name=f"{self.__coin_emoji[coin['name']]} {coin['name']}",
                 value=f"{updown_icon} {format(coin['price'], ',')}원 ({sign}{format(abs(increasing))})",
             )
-        embed.set_footer(text="시세는 5분마다 변경됩니다.")
+        embed.set_footer(text=f"시세는 5분마다 변경됩니다. | 다음 갱신까지: {(next - now).seconds}초")
         return embed
 
     async def purchase(self, user_id: int, coin: str, amount: int) -> Embed:

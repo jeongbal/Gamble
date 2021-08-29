@@ -18,7 +18,8 @@ class Coin(commands.Cog):
     @commands.command(name="코인", aliases=["zd", "ㅋㅇ", "zㅇ"])
     async def _coin(self, ctx: Context):
         msg: Message = await ctx.send(embed=Embed(title="ㄱㄷ"))
-        embed = await self.coin.coin_list()
+        next = self.update_price.next_iteration
+        embed = await self.coin.coin_list(next)
         await msg.edit(embed=embed)
 
     @commands.command(name="구매", aliases=["ra", "ㄱㅁ", "rㅁ"])
