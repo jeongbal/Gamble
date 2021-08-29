@@ -18,7 +18,7 @@ class CoinExt:
     async def update_price(self) -> None:
         coin_list = await self.mongo.get_all_coins_data()
         for coin in coin_list:
-            random_amount = round(randint(-5000000, 5000000) / 1000)
+            random_amount = randint(-5000, 5000)
             if random_amount <= -4900:
                 random_amount = -20000
             elif random_amount >= 4900:
@@ -40,9 +40,11 @@ class CoinExt:
                 if coin["price"] >= coin["previous"]
                 else ":chart_with_downwards_trend:"
             )
+            increasing = coin["price"] - coin["previous"]
+            sign = "+" if increasing >= 0 else "-"
             embed.add_field(
                 name=f"{self.__coin_emoji[coin['name']]} {coin['name']}",
-                value=f"{updown_icon} {format(coin['price'], ',')}원",
+                value=f"{updown_icon} {format(coin['price'], ',')}원 ({sign}{format(abs(increasing))})",
             )
         embed.set_footer(text="시세는 5분마다 변경됩니다.")
         return embed
