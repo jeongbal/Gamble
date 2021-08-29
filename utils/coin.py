@@ -61,3 +61,11 @@ class CoinExt:
             title="판매 성공",
             description=f"잔고: {user_data['money']} | {self.__coin_emoji[coin]} 소지량: {user_data['coins'][coin]}",
         )
+
+    async def user_coin(self, user_id: int) -> Embed:
+        user_data = await self.mongo.get_user_data(user_id)
+        user_coins = user_data["coins"]
+        embed = Embed(title="코인 지갑")
+        for coin, amount in user_coins.items():
+            embed.add_field(name=f"{self.__coin_emoji[coin]}", value=f"{amount}개")
+        return embed
