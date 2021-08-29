@@ -1,5 +1,6 @@
 from discord.embeds import Embed
 from discord.ext import commands, tasks
+from discord.ext.commands.context import Context
 from discord.message import Message
 from utils.coin import CoinExt
 
@@ -18,6 +19,12 @@ class Coin(commands.Cog):
     async def _coin(self, ctx):
         msg: Message = await ctx.send(embed=Embed(title="ㄱㄷ"))
         embed: Embed = await self.coin.coin_list()
+        await msg.edit(embed=embed)
+
+    @commands.command(name="구매", aliases=["ra", "ㄱㅁ", "rㅁ"])
+    async def _purchase(self, ctx: Context, coin: str, amount: int):
+        msg: Message = await ctx.send(embed=Embed(title="ㄱㄷ"))
+        embed: Embed = await self.coin.purchase(ctx.author.id, coin, amount)
         await msg.edit(embed=embed)
 
 
