@@ -8,9 +8,8 @@ class General(commands.Cog):
 
     @commands.command(name="초대")
     async def _invite(self, ctx):
-        await ctx.send(
-            "https://discord.com/oauth2/authorize?client_id=880483042190323722&scope=bot&permissions=2146954615"
-        )
+        url = discord.utils.oauth_url(self.bot.user.id)
+        await ctx.send(url)
 
 
 def setup(bot):
