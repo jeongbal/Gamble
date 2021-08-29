@@ -48,7 +48,7 @@ class CoinExt:
                 name=f"{self.__coin_emoji[coin['name']]} {coin['name']}",
                 value=f"{updown_icon} {format(coin['price'], ',')}원 ({sign}{format(abs(increasing))})",
             )
-        embed.set_footer(text=f"시세는 5분마다 변경됩니다. | 다음 갱신까지: {(next - now).seconds}초")
+        embed.set_footer(text=f"시세는 3분마다 변경됩니다. | 다음 갱신까지: {(next - now).seconds}초")
         return embed
 
     async def purchase(self, user_id: int, coin: str, amount: int) -> Embed:
