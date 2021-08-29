@@ -57,13 +57,15 @@ class Mongo:
     async def exchange_coin(self, user_id: int, coin: str, amount: int) -> bool:
         coin_data = await self.get_coin_price(coin)
         user_data = await self.get_user_data(user_id)
-        total_price = coin_data["price"] * amount
+        total_price = coin_data["price"] * abs(amount)
         user_money = user_data["money"]
         if amount > 0:
             if user_money < total_price:
                 return False
             await self.set_user_money(user_id, user_money - total_price)
         elif amount < 0:
+            if user_data["coins"][coin] < amount:
+                return False
             await self.set_user_money(user_id, user_money + total_price)
         await self.__user_data.update_one(
             {"user_id": user_id}, {"$inc": {f"coins.{coin}": amount}}

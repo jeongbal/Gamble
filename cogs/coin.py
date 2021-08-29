@@ -27,6 +27,12 @@ class Coin(commands.Cog):
         embed: Embed = await self.coin.purchase(ctx.author.id, coin, amount)
         await msg.edit(embed=embed)
 
+    @commands.command(name="판매", aliases=["va", "ㅍㅁ", "vㅁ"])
+    async def _sell(self, ctx: Context, coin: str, amount: int):
+        msg: Message = await ctx.send(embed=Embed(title="ㄱㄷ"))
+        embed: Embed = await self.coin.sell(ctx.author.id, coin, amount)
+        await msg.edit(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Coin(bot))

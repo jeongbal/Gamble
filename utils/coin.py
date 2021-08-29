@@ -52,3 +52,12 @@ class CoinExt:
             title="구매 성공",
             description=f"잔고: {user_data['money']} | {self.__coin_emoji[coin]} 소지량: {user_data['coins'][coin]}",
         )
+
+    async def sell(self, user_id: int, coin: str, amount: int) -> Embed:
+        if not await self.mongo.exchange_coin(user_id, coin, -amount):
+            return Embed(title="코인이 부족합니다.")
+        user_data = await self.mongo.get_user_data(user_id)
+        return Embed(
+            title="판매 성공",
+            description=f"잔고: {user_data['money']} | {self.__coin_emoji[coin]} 소지량: {user_data['coins'][coin]}",
+        )
