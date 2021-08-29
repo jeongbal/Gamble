@@ -16,7 +16,7 @@ class Admin(commands.Cog):
     @commands.is_owner()
     async def _set_money(self, ctx, user_id: int, money: int):
         msg: Message = await ctx.send(embed=discord.Embed(title="ㄱㄷ"))
-        embed: Embed = await self.admin.set_money(user_id, money)
+        embed = await self.admin.set_money(user_id, money)
         await msg.edit(embed=embed)
 
 
