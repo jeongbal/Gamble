@@ -64,7 +64,7 @@ class Mongo:
                 return False
             await self.set_user_money(user_id, user_money - total_price)
         elif amount < 0:
-            if user_data["coins"][coin] < amount:
+            if user_data["coins"][coin] < abs(amount):
                 return False
             await self.set_user_money(user_id, user_money + total_price)
         await self.__user_data.update_one(
