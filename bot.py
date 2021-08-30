@@ -6,7 +6,7 @@ import os
 from utils.database.mongo import Mongo
 
 
-bot = commands.Bot(command_prefix=";")
+bot = commands.Bot(command_prefix=";", help_command=None)
 bot.mongo = Mongo(os.getenv("MONGO_DB_URL"))
 token = os.environ["DISCORD_TOKEN"]
 
