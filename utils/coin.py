@@ -56,7 +56,7 @@ class CoinExt:
         user_data = await self.mongo.get_user_data(user_id)
         return Embed(
             title="구매 성공",
-            description=f"잔고: {user_data['money']} | {self.__coin_emoji[coin]} 소지량: {user_data['coins'][coin]}",
+            description=f"잔고: {format(user_data['money'])} | {self.__coin_emoji[coin]} 소지량: {user_data['coins'][coin]}",
         )
 
     async def sell(self, user_id: int, coin: str, amount: int) -> Embed:
@@ -65,7 +65,7 @@ class CoinExt:
         user_data = await self.mongo.get_user_data(user_id)
         return Embed(
             title="판매 성공",
-            description=f"잔고: {user_data['money']} | {self.__coin_emoji[coin]} 소지량: {user_data['coins'][coin]}",
+            description=f"잔고: {format(user_data['money'])} | {self.__coin_emoji[coin]} 소지량: {user_data['coins'][coin]}",
         )
 
     async def user_coin(self, user_id: int) -> Embed:
@@ -87,7 +87,7 @@ class CoinExt:
         new_user_data = await self.mongo.get_user_data(user_id)
         return Embed(
             title="구매 성공",
-            description=f"잔고: {new_user_data['money']} | {self.__coin_emoji[coin]} 소지량: {new_user_data['coins'][coin]}",
+            description=f"잔고: {format(new_user_data['money'])} | {self.__coin_emoji[coin]} 소지량: {new_user_data['coins'][coin]}",
         )
 
     async def full_sell(self, user_id: int, coin: str) -> Embed:
@@ -99,5 +99,5 @@ class CoinExt:
         new_user_data = await self.mongo.get_user_data(user_id)
         return Embed(
             title="판매 성공",
-            description=f"잔고: {new_user_data['money']} | {self.__coin_emoji[coin]} 소지량: {new_user_data['coins'][coin]}",
+            description=f"잔고: {format(new_user_data['money'])} | {self.__coin_emoji[coin]} 소지량: {new_user_data['coins'][coin]}",
         )
