@@ -1,3 +1,4 @@
+from utils.database.mongo import Mongo
 from discord.embeds import Embed
 from discord.ext import commands, tasks
 from discord.ext.commands.context import Context
@@ -6,9 +7,9 @@ from utils.coin import CoinExt
 
 
 class Coin(commands.Cog):
-    def __init__(self, bot: commands.Bot) -> None:
+    def __init__(self, bot: commands.Bot, mongo: Mongo) -> None:
         self.bot = bot
-        self.coin = CoinExt()
+        self.coin = CoinExt(mongo)
         self.update_price.start()
 
     @tasks.loop(seconds=180)
@@ -54,4 +55,4 @@ class Coin(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Coin(bot))
+    bot.add_cog(Coin(bot, bot.mongo))

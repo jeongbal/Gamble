@@ -1,13 +1,12 @@
 from utils.database.mongo import Mongo
-import os
 from random import randint
 from discord.embeds import Embed
 from datetime import datetime, timezone
 
 
 class CoinExt:
-    def __init__(self) -> None:
-        self.mongo = Mongo(os.getenv("MONGO_DB_URL"))
+    def __init__(self, mongo: Mongo) -> None:
+        self.mongo = mongo
         self.__coin_emoji = {
             "btc": "<:btc:881234727821008966>",
             "doge": "<:doge:881233749872869478>",

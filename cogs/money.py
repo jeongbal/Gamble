@@ -3,14 +3,15 @@ from discord.ext import commands
 from discord.ext.commands.bot import Bot
 from discord.ext.commands.context import Context
 from discord.message import Message
+from utils.database.mongo import Mongo
 
 from utils.money import MoneyExt
 
 
 class Money(commands.Cog):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: Bot, mongo: Mongo):
         self.bot = bot
-        self.money = MoneyExt()
+        self.money = MoneyExt(mongo)
 
     @commands.command(name="돈", aliases=["지갑", "ㄷ", "ㅈㄱ", "wr", "ehs", "e"])
     async def _money(self, ctx: Context):
@@ -33,4 +34,4 @@ class Money(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Money(bot))
+    bot.add_cog(Money(bot, bot.mongo))

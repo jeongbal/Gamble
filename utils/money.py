@@ -1,13 +1,12 @@
+from utils.database.mongo import Mongo
 from discord import Embed
 from discord.ext.commands.context import Context
-from utils.database.mongo import Mongo
-import os
 from random import randint
 
 
 class MoneyExt:
-    def __init__(self) -> None:
-        self.mongo = Mongo(os.getenv("MONGO_DB_URL"))
+    def __init__(self, mongo: Mongo) -> None:
+        self.mongo = mongo
 
     async def money(self, user_id: int) -> Embed:
         if user_data := await self.mongo.get_user_data(user_id):
