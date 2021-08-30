@@ -18,10 +18,10 @@ class CoinExt:
     async def update_price(self) -> None:
         coin_list = await self.mongo.get_all_coins_data()
         for coin in coin_list:
-            random_amount = round(randint(-5000000, 5000000) / 1000)
-            if random_amount <= -4950:
+            random_amount = randint(-5000, 5000)
+            if random_amount <= -4995:
                 random_amount = -50000
-            elif random_amount >= 4950:
+            elif random_amount >= 4995:
                 random_amount = 50000
             price = coin["price"]
             new_price = (
@@ -45,7 +45,7 @@ class CoinExt:
             sign = "+" if increasing >= 0 else "-"
             embed.add_field(
                 name=f"{self.__coin_emoji[coin['name']]} {coin['name']}",
-                value=f"{updown_icon} {format(coin['price'], ',')}원 ({sign}{format(abs(increasing))})",
+                value=f"{updown_icon} {format(coin['price'], ',')}원 ({sign}{format(abs(increasing), ',')})",
             )
         embed.set_footer(text=f"시세는 3분마다 변경됩니다. | 다음 갱신까지: {(next - now).seconds}초")
         return embed
