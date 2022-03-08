@@ -2,4 +2,4 @@ discord==1.7.3
 motor==2.5.1
 black==22.1.0
 jishaku==2.3.2
-dnspython==2.2.0
+dnspython==2.2.1
