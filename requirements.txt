@@ -1,4 +1,4 @@
-discord==1.7.3
+discord==2.0.0
 motor==3.0.0
 black==22.6.0
 jishaku==2.5.1
